@@ -1,2 +1,1 @@
-export * from './transform.data';
-export * from './generate.data';
+export * from './generator';

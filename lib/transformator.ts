@@ -20,7 +20,7 @@ interface ITransformRule {
  *  reverseFromMobileToApi: function(param: object): object
  * }>}
  *
- * @example data will be provided from generateData step
+ * @example data will be provided from generator step
  * data = { test1KeyApi: 'default key 1', test2KeyApi: 'default key 2' }
  * @example web config what will be used for transormation data from default API view to WEB
  * webConfig {
@@ -45,7 +45,6 @@ function transformData({data, webConfig = {}, mobileConfig = {}}): ITransformDat
         if (cur in webConfig) {
           const valueCreator = data[cur].seemsHardcoded ? (() => data[cur].value) : webConfig[cur].value || (() => data[cur].value);
           const keyCreator = webConfig[cur].key || (() => key);
-          console.log(key, valueCreator(), data[cur].seemsHardcoded);
           key = keyCreator(cur);
           value = valueCreator();
         } else {

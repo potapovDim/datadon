@@ -1,8 +1,7 @@
-import * as faker from 'faker';
-import {transformData} from './transform.data';
-import {getRandomString} from '../utils';
+import {transformData} from './transformator';
+import {getRandomString} from './utils';
 
-interface IGenerateData {
+interface Igenerator {
   generate();
 }
 
@@ -48,7 +47,7 @@ const GenerateAction = {
   ...publicKeys
 };
 
-function generateData({generateRules, config = {}, transformRulesWeb = {}, transformRulesMobile = {}}) {
+function generator({generateRules, config = {}, transformRulesWeb = {}, transformRulesMobile = {}}) {
   function getRule(fieldName: string) {
     if (fieldName in config) {
       if (config[fieldName] in generateRules[fieldName] || GenerateAction[config[fieldName]]) {
@@ -68,7 +67,7 @@ function generateData({generateRules, config = {}, transformRulesWeb = {}, trans
     return GenerateAction.unknown;
   }
 
-  const generateDataInterface = {
+  const generatorInterface = {
     generate() {
       const data = Object.getOwnPropertyNames(generateRules).reduce((acc, cur) => {
         const rule = getRule(cur);
@@ -119,7 +118,7 @@ function generateData({generateRules, config = {}, transformRulesWeb = {}, trans
             acc[cur] = {value: generateRules[cur].valid().replace(/[^A-Za-z0-9]/g, 'a')};
             break;
           case GenerateAction.number:
-            acc[cur] = {value: faker.random.number()};
+            acc[cur] = {value: getRandomString(5, {numbers: true})};
             break;
           case GenerateAction.specialSymbols:
             acc[cur] = {value: getRandomString(10, {symbols: true})};
@@ -138,11 +137,11 @@ function generateData({generateRules, config = {}, transformRulesWeb = {}, trans
     },
     updateConfig(newConfig) {
       Object.assign(config, newConfig);
-      return generateDataInterface;
+      return generatorInterface;
     },
     updateRules(newRules) {
       Object.assign(generateRules, newRules);
-      return generateDataInterface;
+      return generatorInterface;
     },
     updateMobileTransformationRules(newRules) {
       Object.assign(transformRulesMobile, newRules);
@@ -152,7 +151,7 @@ function generateData({generateRules, config = {}, transformRulesWeb = {}, trans
     }
   };
 
-  return generateDataInterface;
+  return generatorInterface;
 }
 
-export {IGenerateData, IGenerateRule, publicKeys, generateData};
+export {Igenerator, IGenerateRule, publicKeys, generator};
