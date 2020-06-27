@@ -10,6 +10,11 @@
     "allowJs": true,
     "lib": [
       "es2017"
+    ],
+    "types": [
+      "mocha",
+      "node",
+      "chai"
     ]
   },
   "exclude": [
