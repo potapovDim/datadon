@@ -1,0 +1,23 @@
+{
+  "name": "schema-data",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/potapovDim/schema-data.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/potapovDim/schema-data/issues"
+  },
+  "homepage": "https://github.com/potapovDim/schema-data#readme",
+  "devDependencies": {
+    "typescript": "^3.9.5"
+  }
+}
