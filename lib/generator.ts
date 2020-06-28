@@ -21,30 +21,30 @@ interface IGenerateRule {
 }
 
 const internalUsage = {
-  recursive: 'recursive',
-  configRecursive: 'configRecursive',
-  configValue: 'configValue',
-  unknown: 'unknown',
+  recursive:        'recursive',
+  configRecursive:  'configRecursive',
+  configValue:      'configValue',
+  unknown:          'unknown',
 };
 
-const publicKeys = {
-  default: 'default',
-  valid: 'valid',
-  empty: 'empty',
-  remove: 'remove',
-  exceedLength: 'exceedLength',
-  lessLength: 'lessLength',
-  toLower: 'toLower',
-  toUpper: 'toUpper',
-  skipDigit: 'skipDigit',
-  skipSpecial: 'skipSpecial',
-  number: 'number',
-  specialSymbols: 'specialSymbols'
+const configRules = {
+  default:          'default',
+  valid:            'valid',
+  empty:            'empty',
+  remove:           'remove',
+  exceedLength:     'exceedLength',
+  lessLength:       'lessLength',
+  toLower:          'toLower',
+  toUpper:          'toUpper',
+  skipDigit:        'skipDigit',
+  skipSpecial:      'skipSpecial',
+  number:           'number',
+  specialSymbols:   'specialSymbols'
 };
 
 const GenerateAction = {
   ...internalUsage,
-  ...publicKeys
+  ...configRules
 };
 
 function generator({generateRules, config = {}, transformRulesWeb = {}, transformRulesMobile = {}}) {
@@ -154,4 +154,4 @@ function generator({generateRules, config = {}, transformRulesWeb = {}, transfor
   return generatorInterface;
 }
 
-export {Igenerator, IGenerateRule, publicKeys, generator};
+export {Igenerator, IGenerateRule, configRules, generator};

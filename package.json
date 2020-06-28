@@ -1,12 +1,12 @@
 {
-  "name": "schema-data",
-  "version": "0.0.1",
-  "description": "",
+  "name": "datadon",
+  "version": "0.0.2",
+  "description": "flexible data builder",
   "main": "built/index.js",
   "scripts": {
     "test": "mocha ./__specs__/**/*.spec.ts --config ./.mocharc.json ",
     "test:coverage": "nyc npm run test",
-    "build": "tsc"
+    "build": "rm -rf ./built && tsc"
   },
   "nyc": {
     "include": [
@@ -29,15 +29,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/potapovDim/schema-data.git"
+    "url": "git+https://github.com/potapovDim/datadon.git"
   },
-  "keywords": [],
+  "keywords": [
+    "data",
+    "data builder",
+    "datadon",
+    "build data",
+    "data transformator",
+    "schema",
+    "builder",
+    "generator",
+    "data generator"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/potapovDim/schema-data/issues"
+    "url": "https://github.com/potapovDim/datadon/issues"
   },
-  "homepage": "https://github.com/potapovDim/schema-data#readme",
+  "homepage": "https://github.com/potapovDim/datadon#readme",
   "devDependencies": {
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",

@@ -1,6 +1,6 @@
-# schema-data
+# datadon
 
-## schema-data is a data builder
+## datadon is a data builder
 
 ### Main porpuse of this library is flexiblse data creation, transformation, from one condition to other
 
@@ -11,7 +11,7 @@
 ### default example
 
 ```js
-const {generator} = require('schema-data');
+const {generator} = require('datadon');
 
 function getDefatultData() {
   const generateRules = {
@@ -33,6 +33,8 @@ console.log(defaultDataMobile); // {field1: 'field1 default', field2: 'field2 de
 ### tranformatio to web
 
 ```js
+const {generator} = require('datadon');
+
 function getTransformData() {
   const generateRules = {
     keyApi: {default: () => 'field1 default'},
@@ -49,5 +51,42 @@ const dataWeb = getTransformData().generate().toWeb();
 
 console.log(dataAPI) // {keyApi: 'field1 default', field2: 'field2 default'}
 console.log(dataWeb) // {keyWeb: 'Web key', field2: 'field2 default'}
+```
+
+### configure your fields
+
+```js
+const {generator, configRules} = require('datadon');
+
+// remove
+function getConfiguredData(config) {
+  const generateRules = {
+    keyApi: {default: () => 'field1 default'},
+    field2: {default: () => 'field2 default'}
+  };
+  const transformRulesWeb = {
+    keyApi: {key: () => 'keyWeb', value: () => 'Web key'},
+  };
+  return generateData({generateRules, transformRulesWeb, config});
+}
+const generated = getTransformData({keyApi: configRules.remove}).generate();
+const dataAPI = generated.toApi();
+const dataWeb = generated.toWeb();
+
+console.log(dataAPI) // {field2: 'field2 default'}
+console.log(dataWeb) // {field2: 'field2 default'}
+
+// default / valid
+function getConfiguredData(config) {
+  const generateRules = {
+    keyApi: {default: () => 'field1 default', valid: () => 'field1 valid'},
+  };
+  return generateData({generateRules, transformRulesWeb, config});
+}
+const dataAPIValid = getTransformData({keyApi: configRules.valid}).generate();
+const dataAPIDefault = getTransformData().generate();
+
+console.log(dataAPIValid) // {keyApi: 'field1 valid'}
+console.log(dataAPIDefault) // {keyApi: 'field1 default'}
 
 ```
